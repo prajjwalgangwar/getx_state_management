@@ -1,13 +1,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:getx_state_management/controller/todo_controller.dart';
+import 'package:getx_state_management/model/todo_model.dart';
 
 class TodoPage extends StatelessWidget{
 
   TextEditingController descriptionController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TodoController todoController = Get.put(TodoController());
+  GetStorage todoList = GetStorage('todo list');
 
 
   @override
@@ -36,12 +39,14 @@ class TodoPage extends StatelessWidget{
                   Expanded(
                     child: Align(
                       alignment: Alignment.centerLeft,
-                        child: Text(todoController.todoList[index])),
+                        child: Text(todoController.todoList[index].title.toString())),
                   ),
                   Align(
                     alignment: Alignment.centerRight,
                     child: IconButton(onPressed: (){
+
                       todoController.deleteTodo(index);
+
                     }, icon: Icon(Icons.delete, color: Colors.black,)),
                   )
                 ],
@@ -82,7 +87,11 @@ class TodoPage extends StatelessWidget{
           // ),
           InkWell(
             onTap: (){
-              todoController.addTodo(titleController.value.text.toString());
+              todoController.addTodo(
+                Todo(
+                  title: titleController.text.toString()
+                )
+              );
               print('Value: ${titleController.value.text}');
               Get.snackbar('Save Alert', 'todo saved', backgroundColor: Colors.deepPurple.shade200);
             },

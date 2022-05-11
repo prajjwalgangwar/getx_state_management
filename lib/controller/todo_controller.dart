@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_state_management/model/todo_model.dart';
 
 class TodoController extends GetxController{
-  var todoList = <String>[].obs;
+  var todoList = List<Todo>.empty().obs;
 
-  addTodo(title){
-    todoList.add(title);
+  addTodo(Todo todo){
+    todoList.add(todo);
   }
 
   deleteTodo(index){
