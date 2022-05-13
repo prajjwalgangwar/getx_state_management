@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:getx_state_management/Routes.dart';
-import 'package:getx_state_management/controller/shopping_bindings.dart';
 import 'package:getx_state_management/view/Home.dart';
-import 'package:getx_state_management/view/LandingPage.dart';
 
-void main() {
+void main() async{
+  await GetStorage.init();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
+  var mySystemOverlay = SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.yellow.shade50,
+      statusBarColor: Colors.black,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarIconBrightness: Brightness.dark
+  );
+
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Getx Management',
-      initialRoute: '/landing_page',
-      getPages: Routes().routes,
-      home: LandingPage(),
+    return AnnotatedRegion(
+      value: mySystemOverlay,
+      child: GetMaterialApp(
+        title: 'Getx',
+        getPages: Routes().routes,
+        home: Home(),
+      ),
     );
   }
 }

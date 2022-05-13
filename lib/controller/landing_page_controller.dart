@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
-class LandingPageController extends GetxController{
+class LandingPageController extends GetxController {
   var tabIndex = 0.obs;
 
-  void changeIndex(int index){
+  void changeIndex(int index) {
     tabIndex.value = index;
   }
 }
