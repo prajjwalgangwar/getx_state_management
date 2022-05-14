@@ -1,8 +1,8 @@
 class Todo {
   String? title;
-  bool? done;
+  bool done;
 
-  Todo({this.title, this.done});
+  Todo({this.title, this.done = false});
 
   factory Todo.fromJson(Map<String, dynamic> json) {
     return Todo(title: json['title'], done: json['done']);
